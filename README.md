@@ -1,7 +1,10 @@
+
 <p align="center">
  <img width="550px" src="https://cdn.discordapp.com/attachments/920120152266252298/950749206870638603/logo.png" align="center" alt="VirtualRealty" />
  <h2 align="center"></h2>
  <p align="center">A plot creation and management plugin for Minecraft</p>
+ <p align="center">Originally designed by MODN METL LTD and coded by  plytki</p>
+ <p align="center">Now maintained by BenCodez</p>
 </p>
 
 <p align="center">
@@ -17,7 +20,7 @@
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/MODNMETL/VirtualRealty/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/BenCodez/VirtualRealty/issues). 
 
 ## Show your support
 
