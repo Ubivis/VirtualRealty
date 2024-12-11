@@ -1,15 +1,15 @@
 package com.modnmetl.virtualrealty.util;
 
-import com.modnmetl.virtualrealty.VirtualRealty;
-import com.modnmetl.virtualrealty.model.math.Direction;
-import com.modnmetl.virtualrealty.manager.PlotManager;
-import com.modnmetl.virtualrealty.model.plot.Plot;
-import com.modnmetl.virtualrealty.model.math.BlockVector2;
-import com.modnmetl.virtualrealty.model.region.Cuboid;
-import com.modnmetl.virtualrealty.model.math.BlockVector3;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+
+import com.modnmetl.virtualrealty.VirtualRealty;
+import com.modnmetl.virtualrealty.manager.PlotManager;
+import com.modnmetl.virtualrealty.model.math.BlockVector3;
+import com.modnmetl.virtualrealty.model.math.Direction;
+import com.modnmetl.virtualrealty.model.plot.Plot;
+import com.modnmetl.virtualrealty.model.region.Cuboid;
 
 public final class RegionUtil {
 
