@@ -1,5 +1,11 @@
 package com.modnmetl.virtualrealty.commands.plot.subcommand;
 
+import java.util.LinkedList;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import com.modnmetl.virtualrealty.VirtualRealty;
 import com.modnmetl.virtualrealty.commands.SubCommand;
 import com.modnmetl.virtualrealty.exception.FailedCommandException;
@@ -9,17 +15,8 @@ import com.modnmetl.virtualrealty.model.other.ChatMessage;
 import com.modnmetl.virtualrealty.model.other.CommandType;
 import com.modnmetl.virtualrealty.model.other.Confirmation;
 import com.modnmetl.virtualrealty.model.other.ConfirmationType;
-import com.modnmetl.virtualrealty.model.permission.ManagementPermission;
 import com.modnmetl.virtualrealty.model.plot.Plot;
 import com.modnmetl.virtualrealty.model.plot.PlotMember;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import java.time.LocalDateTime;
-import java.util.LinkedList;
 
 public class LeaveSubCommand extends SubCommand {
 

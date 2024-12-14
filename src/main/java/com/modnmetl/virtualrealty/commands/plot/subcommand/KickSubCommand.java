@@ -1,22 +1,23 @@
 package com.modnmetl.virtualrealty.commands.plot.subcommand;
 
-import com.modnmetl.virtualrealty.VirtualRealty;
-import com.modnmetl.virtualrealty.commands.SubCommand;
-import com.modnmetl.virtualrealty.model.other.CommandType;
-import com.modnmetl.virtualrealty.model.permission.ManagementPermission;
-import com.modnmetl.virtualrealty.exception.FailedCommandException;
-import com.modnmetl.virtualrealty.manager.PlotManager;
-import com.modnmetl.virtualrealty.model.plot.Plot;
-import com.modnmetl.virtualrealty.model.plot.PlotMember;
-import com.modnmetl.virtualrealty.model.other.ChatMessage;
+import java.time.LocalDateTime;
+import java.util.LinkedList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.time.LocalDateTime;
-import java.util.LinkedList;
+import com.modnmetl.virtualrealty.VirtualRealty;
+import com.modnmetl.virtualrealty.commands.SubCommand;
+import com.modnmetl.virtualrealty.exception.FailedCommandException;
+import com.modnmetl.virtualrealty.manager.PlotManager;
+import com.modnmetl.virtualrealty.model.other.ChatMessage;
+import com.modnmetl.virtualrealty.model.other.CommandType;
+import com.modnmetl.virtualrealty.model.permission.ManagementPermission;
+import com.modnmetl.virtualrealty.model.plot.Plot;
+import com.modnmetl.virtualrealty.model.plot.PlotMember;
 
 public class KickSubCommand extends SubCommand {
 

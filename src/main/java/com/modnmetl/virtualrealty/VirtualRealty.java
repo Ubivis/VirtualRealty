@@ -2,8 +2,6 @@ package com.modnmetl.virtualrealty;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -21,6 +19,7 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -38,6 +37,7 @@ import com.modnmetl.virtualrealty.configs.SizesConfiguration;
 import com.modnmetl.virtualrealty.listener.PlotEntranceListener;
 import com.modnmetl.virtualrealty.listener.player.PlayerActionListener;
 import com.modnmetl.virtualrealty.listener.player.PlayerListener;
+import com.modnmetl.virtualrealty.listener.premium.PanelListener;
 import com.modnmetl.virtualrealty.listener.protection.BorderProtectionListener;
 import com.modnmetl.virtualrealty.listener.protection.PlotProtectionListener;
 import com.modnmetl.virtualrealty.listener.protection.WorldProtectionListener;
@@ -51,9 +51,9 @@ import com.modnmetl.virtualrealty.model.plot.Plot;
 import com.modnmetl.virtualrealty.model.plot.PlotSize;
 import com.modnmetl.virtualrealty.registry.VirtualPlaceholders;
 import com.modnmetl.virtualrealty.sql.Database;
+import com.modnmetl.virtualrealty.util.PanelUtil;
 import com.modnmetl.virtualrealty.util.UpdateChecker;
 import com.modnmetl.virtualrealty.util.configuration.ConfigurationFactory;
-import com.modnmetl.virtualrealty.util.loader.Loader;
 import com.zaxxer.hikari.HikariDataSource;
 
 import lombok.Getter;
@@ -84,9 +84,7 @@ public final class VirtualRealty extends JavaPlugin {
 	public static List<BukkitTask> tasks = new ArrayList<>();
 	public static ServerVersion currentServerVersion = ServerVersion.MODERN;
 	public static final Permission GLOBAL_PERMISSION = new Permission("virtualrealty");
-	@Getter
-	@Setter
-	private static Object premium;
+
 	public static boolean upToDate;
 	public static String latestVersion;
 	public static boolean developmentBuild;
@@ -125,15 +123,7 @@ public final class VirtualRealty extends JavaPlugin {
 				getPluginConfiguration().locale.split("_")[1]);
 		configureMessages();
 		checkUpdates();
-		if (!pluginConfiguration.license.key.isEmpty() && !pluginConfiguration.license.email.isEmpty()) {
-			try {
-				new Loader(pluginConfiguration.license.key, pluginConfiguration.license.email,
-						this.getDescription().getVersion(), getLoader(), pluginConfiguration.loaderDebugMode);
-			} catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-				e.printStackTrace();
-				getLogger().log(Level.WARNING, "Load of premium features failed.");
-			}
-		}
+
 		loadMetrics();
 		loadSizesConfiguration();
 		try {
@@ -155,13 +145,11 @@ public final class VirtualRealty extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		try {
-			Method method = Class.forName("com.modnmetl.virtualrealty.premiumloader.PremiumLoader", true, getLoader())
-					.getMethod("onDisable");
-			method.setAccessible(true);
-			method.invoke(premium);
-		} catch (Exception ignored) {
-		}
+		PanelUtil.SELECTED_PANEL.forEach((uuid, panelType) -> {
+			Player player = Bukkit.getPlayer(uuid);
+			assert player != null;
+			player.closeInventory();
+		});
 		DraftListener.DRAFT_MAP.forEach((player, gridStructureEntryEntry) -> {
 			player.getInventory().remove(gridStructureEntryEntry.getValue().getValue().getItemStack());
 			player.getInventory().addItem(gridStructureEntryEntry.getValue().getKey().getItemStack());
@@ -382,15 +370,7 @@ public final class VirtualRealty extends JavaPlugin {
 		new PlayerActionListener(this);
 		new DraftListener(this);
 		new ConfirmationListener(this);
-		try {
-			List<Class<?>> classes = new ArrayList<>();
-			classes.add(Class.forName("com.modnmetl.virtualrealty.listener.premium.PanelListener", true, getLoader()));
-			for (Class<?> aClass : classes) {
-				aClass.getConstructors()[0].newInstance(this);
-			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| InvocationTargetException ignored) {
-		}
+		new PanelListener(this);
 		debug("Registered listeners");
 	}
 
