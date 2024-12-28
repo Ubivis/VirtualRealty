@@ -48,17 +48,6 @@ public class PlotCommand implements CommandExecutor {
             printHelp(sender);
             return false;
         }
-        if (args[0].equalsIgnoreCase("panel")) {
-            try {
-                Class.forName("com.modnmetl.virtualrealty.premiumloader.PremiumLoader", true, VirtualRealty.getLoader());
-            } catch (Exception e) {
-                ChatMessage.of("§aThis function is available with a valid license key").send(sender);
-                TextComponent linkComponent = new TextComponent("§fhttps://modnmetl.com/");
-                linkComponent.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://modnmetl.com/category/virtual-realty-plugin-61eef16fe2eeab00116a3e64"));
-                ChatMessage.of(new TextComponent("§aPlease visit "), linkComponent, new TextComponent(" §ato purchase one")).send(sender);
-                return false;
-            }
-        }
         try {
             String subcommandName = String.valueOf(args[0].toCharArray()[0]).toUpperCase() + args[0].substring(1);
             Optional<SubCommand> subCommand1 = CommandRegistry.getSubCommand(subcommandName.toLowerCase(), CommandType.PLOT);
