@@ -2,7 +2,7 @@ main: com.modnmetl.virtualrealty.VirtualRealty
 name: VirtualRealty
 version: ${project.version}
 prefix: Virtual Realty
-authors: [ plytki ]
+authors: [ BenCodez, plytki ]
 api-version: 1.21
 description: §7A plot creation and management plugin for Minecraft
 softdepend: [ dynmap, PlaceholderAPI ]
