@@ -31,17 +31,6 @@ public class PluginConfiguration extends OkaeriConfig {
 	@Comment("Local loader mode (for devs)")
 	public boolean loaderDebugMode = false;
 
-	@Comment("Here you put your license details")
-	public License license = new License();
-
-	@Names(strategy = NameStrategy.IDENTITY)
-	public static class License extends OkaeriConfig {
-
-		public String key = "";
-		public String email = "";
-
-	}
-
 	@Comment("Set player gamemode to change when they enter their plot")
 	public boolean enablePlotGamemode = false;
 
